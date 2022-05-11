@@ -11,7 +11,6 @@ or two pie charts
 4th of july - tries to answer how much of an impact the 4th has on submissions
 Combined days - uses the 10 frequent names above and then combines if a date appears more than once at different times
 
-
 """
 import random
 import pandas as pd
@@ -62,7 +61,7 @@ def popular_shapes_pie(shape_data):
 
 def popular_duration_pie(duration_data):
     duration_data = duration_data[:10]
-    fig = px.pie(duration_data, values= list(duration_data[0:]), names = list(duration_data.keys()), color_discrete_sequence=px.colors.sequential.Greens)
+    fig = px.pie(duration_data, values= list(duration_data[0:]), names = list(duration_data.keys()), color_discrete_sequence=px.colors.sequential.Greens, title = "Most Frequent Duration of Sightings (in Seconds)")
     return st.write(fig)
 
 def random_story(ufo_data):
@@ -214,7 +213,7 @@ elif page_select == "General Data": # back-end if statement, loads general data 
     st.subheader("Pie Chart of Top 15 Sighting Shapes:") # front-end chart heading
     popular_shapes_pie(shape_data) # front-end call and siplay shape pie chart
     duration_data = ufo_data["duration (seconds)"].value_counts() # back-end set variable
-    st.subheader("Pie Chart of Top 15 Durations in Seconds:") # front-end chart heading
+    st.subheader("Pie Chart of Top 15 Sighting Durations:") # front-end chart heading
     popular_duration_pie(duration_data) # front-end call and siplay shape pie chart
 elif page_select == "IDK you tell me": # back-end if statement, loads idk page
     st.title("UFO Sightings: a Python Project") # front-end general data page title
@@ -242,33 +241,25 @@ elif page_select == "IDK you tell me": # back-end if statement, loads idk page
     if map and shape and duration:
         st.subheader("Map:") # front-end sub heading
         states_location_map(states_location) # front-end call and display function
-        st.subheader("Pie Chart of Top Shapes:") # front-end sub heading
         state_shape_pie(states_shape) # front-end call and display function
-        st.subheader("Pie Chart of Top Duration:") # front-end sub heading
         state_duration_pie(states_duration) # front-end call and display function
     elif map and shape:
         st.subheader("Map:") # front-end sub heading
         states_location_map(states_location) # front-end call and display function
-        st.subheader("Pie Chart of Top Shapes:") # front-end sub heading
         state_shape_pie(states_shape) # front-end call and display function
     elif map and duration:
         st.subheader("Map:") # front-end sub heading
         states_location_map(states_location) # front-end call and display function
-        st.subheader("Pie Chart of Top Duration:") # front-end sub heading
         state_duration_pie(states_duration) # front-end call and display function
     elif shape and duration:
-        st.subheader("Pie Chart of Top Shapes:") # front-end sub heading
         state_shape_pie(states_shape) # front-end call and display function
-        st.subheader("Pie Chart of Top Duration:") # front-end sub heading
         state_duration_pie(states_duration) # front-end call and display function
     elif map:
         st.subheader("Map:") # front-end sub heading
         states_location_map(states_location) # front-end call and display function
     elif shape:
-        st.subheader("Pie Chart of Top Shapes:") # front-end sub heading
         state_shape_pie(states_shape) # front-end call and display function
     elif duration:
-        st.subheader("Pie Chart of Top Duration:") # front-end sub heading
         state_duration_pie(states_duration) # front-end call and display function
 elif page_select == "Combined Days":
     st.title("UFO Sightings: a Python Project") # front-end general data page title
@@ -276,7 +267,7 @@ elif page_select == "Combined Days":
     st.write("\n \n") # front-end spacing
     choices = ["11/16/1999","10/31/2004","9/19/2009","7/4/2010","7/4/2011","7/4/2012","7/4/2013"] # back-end set variable 
     st.sidebar.header("Map:") # front-end sidebar heading
-    day_dec = st.sidebar.radio("Which High activity day do you want to map out?",choices) # front end sidebar date selector
+    day_dec = st.sidebar.selectbox("Which High activity day do you want to map out?",choices) # front end sidebar date selector
     st.header(f"All of the Sightings on {day_dec}:") # front-end map heading
     if day_dec == "11/16/1999": # back-end
         st.caption(f"{day_dec} was an interesting day, as all the sightings seem to be regional, interesting!")
