@@ -17,7 +17,7 @@ import random
 import pandas as pd
 import streamlit as st
 import pydeck as pdk
-import plotly-express as px
+import plotly_express as px
 from PIL import Image
 
 
